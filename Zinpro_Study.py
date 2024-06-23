@@ -549,7 +549,7 @@ fig_carcass.update_layout(
     paper_bgcolor='white',
     yaxis=dict(
         showgrid=False,
-        range=[filtered_data[carcass].min() * 0.9, filtered_data[carcass].max() + error_y_carc.max()]
+        range=[filtered_data[carcass].min() * 0.9, filtered_data[carcass].max() *1.05]
     )
 )
 
