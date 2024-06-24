@@ -519,18 +519,18 @@ with st.container():
 
     # Display the mean values grouped by treatment
     st.write("Average Values by Treatment")
-def Home():
+def Table_carc():
     # Define custom CSS for margin
 
-    with st.expander('Click to choose the variables'):
-        showData = st.multiselect('Select Columns to Display', aggregated_data_carc.columns, default=[])
+    with st.expander('Select one or more variables to display in the table'):
+        showData = st.multiselect('Select Columns to Display', aggregated_data_carc.columns, default=['TR'])
         if showData:
             # Add a div with the custom class around the table
             st.markdown('<div class="margined-content">', unsafe_allow_html=True)
             st.write(aggregated_data_carc[showData])
             st.markdown('</div>', unsafe_allow_html=True)
         else:
-            st.write("Select columns to display data")
+            st.write("Select one or more variables to display in the table")
 
 
 
@@ -548,7 +548,7 @@ def graphs_carcass():
             """,
             unsafe_allow_html=True
         )
-
+        Table_carc()
         # Use the custom CSS class to center the subheader
         st.markdown('<h2 class="center-text">Carcass</h2>', unsafe_allow_html=True)
 
@@ -639,7 +639,7 @@ def sideBar():
     elif selected == 'Carcass':
         #st.subheader(f"Page: {selected}")
         graphs_carcass()
-        Home()
+        #Home()
 
 
 
