@@ -226,15 +226,25 @@ def graphs_performance():
                      error_y=error_y)
 
     fig_FCR.update_layout(
+        title={
+            'text': 'Feed Conversion Ratio',
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'
+        },
         template="plotly_white",
         plot_bgcolor="white",
         paper_bgcolor='white',
         yaxis=dict(
             showgrid=False,  # Hide horizontal grid lines
-            range=[age_filtered[y].min() * 0.9, age_filtered[y].max() + age_filtered[y].std()]  # Set the range of the Y-axis
-        )
+            range=[age_filtered[y].min() * 0.9, age_filtered[y].max() + age_filtered[y].std()]
+            # Set the range of the Y-axis
+        ),
+        width=900,  # Set the desired width
+        height=500,  # Set the desired height
+        margin=dict(l=350)  # Adjust the left margin to shift the chart to the right
     )
-
 
     p_value_fcr = age_p.iloc[0]
     annotation_text = "<i>P</i> < 0.001" if p_value_fcr < 0.001 else f"<i>P</i> = {p_value_fi}"
@@ -451,13 +461,24 @@ def graphs_cumulative():
                          error_y=error_y_cum)
 
     fig_FCR_cum.update_layout(
+        title={
+            'text': 'Feed Conversion Ratio',
+            'y': 0.9,
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'
+        },
         template="plotly_white",
         plot_bgcolor='white',
         paper_bgcolor='white',
         yaxis=dict(
             showgrid=False,  # Hide horizontal grid lines
-            range=[age_filtered_cum[y].min() * 0.9, age_filtered_cum[y].max() + age_filtered_cum[y].std()]  # Set the range of the Y-axis
-        )
+            range=[age_filtered_cum[y].min() * 0.9, age_filtered_cum[y].max() + age_filtered_cum[y].std()]
+            # Set the range of the Y-axis
+        ),
+        width=900,  # Set the desired width
+        height=500,  # Set the desired height
+        margin=dict(l=350)  # Adjust the left margin to shift the chart to the right
     )
 
     fig_FCR_cum.add_annotation(
@@ -533,7 +554,6 @@ def Table_carc():
             st.write("Select one or more variables to display in the table")
 
 
-
 def graphs_carcass():
     with st.container():
         st.markdown('------------')
@@ -542,13 +562,13 @@ def graphs_carcass():
             <style>
             .center-text {
                 text-align: center;
-                #margin-top: 30px; /* Adjust this value as needed */
+                #margin-top: 0px; /* Adjust this value as needed */
             }
             </style>
             """,
             unsafe_allow_html=True
         )
-        Table_carc()
+
         # Use the custom CSS class to center the subheader
         st.markdown('<h2 class="center-text">Carcass</h2>', unsafe_allow_html=True)
 
@@ -568,9 +588,10 @@ def graphs_carcass():
 
         # Display the mean values grouped by treatment
         st.write("Average Values by Treatment")
+        Table_carc()
     with st.container():
-        st.sidebar.header('Select carcass part')
-        carcass = st.sidebar.selectbox('Select carcass part', aggregated_data_carc_noTR.columns, index=0)
+        st.sidebar.header('Carcass variables')
+        carcass = st.sidebar.selectbox('Select one variable', aggregated_data_carc_noTR.columns, index=0)
         carcass_p = df6[carcass].iloc[0].round(3)
         error_y_carc = filtered_data.groupby('TR')[carcass].std()
 
@@ -585,6 +606,7 @@ def graphs_carcass():
 
 
     # Update the layout to center the title
+
     fig_carcass.update_layout(
         title={
             'text': carcass,
@@ -598,9 +620,13 @@ def graphs_carcass():
         paper_bgcolor='white',
         yaxis=dict(
             showgrid=False,
-            range=[filtered_data[carcass].min() * 0.9, filtered_data[carcass].max() *1.05]
-        )
+            range=[filtered_data[carcass].min() * 0.9, filtered_data[carcass].max() * 1.05]
+        ),
+        width=900,  # Set the desired width
+        height=600,  # Set the desired height
+        margin=dict(l=350)  # Adjust the left margin to shift the chart to the right
     )
+
 
     fig_carcass.add_annotation(
         text=f"<i>P</i> = {carcass_p}",
