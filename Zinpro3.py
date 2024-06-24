@@ -19,44 +19,33 @@ st.set_page_config(page_title='Zinpro', page_icon='Zinpro', layout='wide')
 st.sidebar.image("Zinpro.png", caption='Zinpro Availa')
 
 with st.container():
-    # Custom CSS for the header color
     st.markdown(
         """
         <style>
+        .fixed-title {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 9999;
+            padding: 30px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .content {
+            margin-top: 10px; /* Adjust this value to add more space below the title */
+        }
         .header {
             color: #00009e;
             font-size: 4em;
             font-weight: bold;
+            text-align: left;
         }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # Use the custom CSS class for the header
-    st.markdown('<h1 class="header">Zinc and Chrome Study</h1>', unsafe_allow_html=True)
-
-    # Custom CSS for the subheader color
-    st.markdown(
-        """
-        <style>
         .subheader {
             color: #000000;
-            font-size: 1.5em; /* Adjust the size to make it appropriate for a subheader */
+            font-size: 1.5em;
             font-weight: bold;
+            text-align: left;
         }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # Use the custom CSS class for the subheader
-    st.markdown('<h2 class="subheader">Effects of Isoferm Inclusion in Broilers Diets</h2>', unsafe_allow_html=True)
-
-    st.markdown('------------')
-    st.markdown(
-        """
-        <style>
         .center-text {
             text-align: center;
         }
@@ -64,6 +53,14 @@ with st.container():
         """,
         unsafe_allow_html=True
     )
+
+    # Fixed title
+    st.markdown(
+        '<div class="fixed-title"><h1 class="header">Zinc and Chrome Study</h1><h2 class="subheader">Effects of Isoferm Inclusion in Broilers Diets</h2></div>',
+        unsafe_allow_html=True)
+
+    # Main content with scrollbar
+    st.markdown('<div class="content">', unsafe_allow_html=True)
 
 
 #########
@@ -83,9 +80,21 @@ color_map = {'IM': '#000000', 'Availa-iso': '#000061', 'Availa-high': '#00009e'}
 
 def graphs_performance():
     # Use the custom CSS class to center the subheader
-    st.markdown('<h2 class="center-text">Performance by Age</h2>', unsafe_allow_html=True)
-    # Display sidebar image
+    # Define the custom CSS for centering text
+    st.markdown(
+        """
+        <style>
+        .center-text {
+            text-align: center;
+            margin-top: 30px; /* Adjust this value as needed */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
+    # Use the custom CSS class to center the subheader
+    st.markdown('<h2 class="center-text">Performance by Age</h2>', unsafe_allow_html=True)
 
     # Sidebar for selecting age
     st.sidebar.header('Select Age')
@@ -292,6 +301,7 @@ def graphs_cumulative():
         <style>
         .center-text {
             text-align: center;
+            margin-top: 30px; /* Adjust this value as needed */
         }
         </style>
         """,
@@ -510,15 +520,17 @@ with st.container():
     # Display the mean values grouped by treatment
     st.write("Average Values by Treatment")
 def Home():
-    with st.expander('Choose the variables'):
+    # Define custom CSS for margin
+
+    with st.expander('Click to choose the variables'):
         showData = st.multiselect('Select Columns to Display', aggregated_data_carc.columns, default=[])
         if showData:
+            # Add a div with the custom class around the table
+            st.markdown('<div class="margined-content">', unsafe_allow_html=True)
             st.write(aggregated_data_carc[showData])
+            st.markdown('</div>', unsafe_allow_html=True)
         else:
             st.write("Select columns to display data")
-
-# Call the Home function to display the table
-#Home()
 
 
 
@@ -530,6 +542,7 @@ def graphs_carcass():
             <style>
             .center-text {
                 text-align: center;
+                #margin-top: 30px; /* Adjust this value as needed */
             }
             </style>
             """,
@@ -625,8 +638,10 @@ def sideBar():
         graphs_cumulative()
     elif selected == 'Carcass':
         #st.subheader(f"Page: {selected}")
-        Home()
         graphs_carcass()
+        Home()
+
+
 
 
 # Call the sidebar function within the Streamlit app
