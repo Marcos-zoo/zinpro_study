@@ -544,7 +544,7 @@ def Table_carc():
     # Define custom CSS for margin
 
     with st.expander('Select one or more variables to display in the table'):
-        showData = st.multiselect('Select Columns to Display', aggregated_data_carc.columns, default=['TR'])
+        showData = st.multiselect('Select Columns to Display', aggregated_data_carc.columns, default=[])
         if showData:
             # Add a div with the custom class around the table
             st.markdown('<div class="margined-content">', unsafe_allow_html=True)
