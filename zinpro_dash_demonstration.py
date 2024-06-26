@@ -492,7 +492,7 @@ def laying_hens():
         b8 = 0.00191
         c8 = 1.4524
 
-        week = np.arange(18, 90, 1)
+        week = np.arange(18, 90, 0.051)
 
         EO_maq1 = {'week': week, 'Treatment': 'IM', 'indice': 1,
                    'EO': a * np.exp(-b * week) / (1 + np.exp(-c * (week - d)))}
@@ -556,12 +556,12 @@ def laying_hens():
 def broiler_breed():
     @st.cache_data
     def data_broiler_breed():
-        day = np.arange(130, 191, 1)
+        day = np.arange(130, 191, 0.4)
         AACM1 = 96.9684 * np.exp(-np.exp(-0.1530 * (day - 144.4)))
         IM1 = 97.9281 * np.exp(-np.exp(-0.1416 * (day - 146.1)))
 
-        Treatment_IM = np.repeat('IM', (191 - 130))
-        Treatment_AACM = np.repeat('AACM', (191 - 130))
+        Treatment_IM = np.repeat('IM', len(day))
+        Treatment_AACM = np.repeat('AACM', len(day))
 
         data_IM = {'Day': day, 'EO': IM1, 'Treatment': Treatment_IM}
         data_AACM = {'Day': day, 'EO': AACM1, 'Treatment': Treatment_AACM}
