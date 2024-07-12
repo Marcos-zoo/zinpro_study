@@ -56,7 +56,7 @@ with st.container():
 
     # Fixed title
     st.markdown(
-        '<div class="fixed-title"><h1 class="header">Zinc and Chrome Study</h1><h2 class="subheader">Effects of Isoferm Inclusion in Broilers Diets</h2></div>',
+        '<div class="fixed-title"><h1 class="header">Zinc and Chrome Study</h1><h2 class="subheader">Effects of Availa Zinc Chrome Inclusion in Broilers Diets</h2></div>',
         unsafe_allow_html=True)
 
     # Main content with scrollbar
@@ -263,7 +263,7 @@ def graphs_performance():
     # Define letter annotations based on age
     letters = []
     if age == 21:
-        letters = ['a', 'b', 'b']
+        letters = ['b', 'b', 'a']
     elif age == 34:
         letters = ['a', 'b', 'b']
 
